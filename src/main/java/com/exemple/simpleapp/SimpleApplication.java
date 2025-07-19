@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SimpleApplication {
 
-     @GetMapping("/")
+    @GetMapping("/")
     public String home() {
         return "Olá! Esta é uma aplicação Java simples rodando em um container Docker. " +
                "Construída com Spring Boot e Spring Framework.";
