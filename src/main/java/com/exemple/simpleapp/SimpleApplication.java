@@ -11,7 +11,8 @@ public class SimpleApplication {
 
     @GetMapping("/")
     public String home() {
-        return "Olá! Esta é uma aplicação Java simples rodando em um container Docker.";
+        return "Olá! Esta é uma aplicação Java simples rodando em um container Docker.
+            Construida com Spring Boot e Spring Framework.";
     }
 
     public static void main(String[] args) {
