@@ -29,4 +29,6 @@ mvn clean package
 Após executar, a aplicação estará disponível em `http://localhost:8080`.
 
 ## Autor
-Bruno Oliveira 
+Bruno Oliveira - Devops Engineer
+
+
