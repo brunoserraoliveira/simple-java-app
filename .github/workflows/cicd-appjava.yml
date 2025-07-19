@@ -3,6 +3,8 @@ name: CI-CD
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -51,6 +53,23 @@ jobs:
     needs: [CI]
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Iniciando o deploy..."
-      - run: echo "Deploy da imagem ${{ vars.DOCKERHUB_USERNAME }}/appjava com as tags geradas no CI"
-      - run: echo "Deploy concluído com sucesso!"
+      - name: Copiar chave SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: ""
+          target: ""
+
+      - name: Deploy na EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/appjava:latest
+            docker stop appjava || true
+            docker rm appjava || true
+            docker run -d --name appjava -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/appjava:latest
