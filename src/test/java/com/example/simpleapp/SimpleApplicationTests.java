@@ -25,7 +25,8 @@ class SimpleApplicationTests {
     void homeEndpointShouldReturnDefaultMessage() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("Olá! Esta é uma aplicação Java simples rodando em um container Docker."));
+                
+                 .andExpect(content().string("Olá! Esta é uma aplicação Java simples rodando em um container Docker. Construída com Spring Boot e Spring Framework."));
     }
 }
 
