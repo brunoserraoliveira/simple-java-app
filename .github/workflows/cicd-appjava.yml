@@ -39,7 +39,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/appjava
 
-      # Indentação corrigida e versionamento melhorado
+      # Construir e enviar a imagem Docker
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
